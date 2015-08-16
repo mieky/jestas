@@ -9,6 +9,7 @@
         "modules": true
     },
     "rules": {
-        "semi": 2
+        "semi": 2,
+        "no-process-exit": 0
     }
 }

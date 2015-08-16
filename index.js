@@ -7,14 +7,13 @@ var pad = require("pad");
 var _ = require("lodash");
 
 var configFile = findConfig("jestas.json");
-
 if (!configFile) {
     console.log(`Configuration file not found. Create a 'jestas.json' that looks like this:
 {
     \"node\": \"http://jenkins.nodejs.org/\"
 }
 `);
-    process.exit(1); // eslint-disable-line
+    process.exit(1);
 }
 
 var config = require(configFile);
@@ -59,4 +58,5 @@ fetch(url)
     })
     .catch(err => {
         console.log(`Couldn't fetch build list from ${url}: ${err.message}`);
+        process.exit(1);
     });
