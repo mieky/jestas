@@ -15,7 +15,7 @@ Put a configuration file in place, and run:
 
 `jestas [fuzzy search terms]`
 
-You can provide an optional fuzzy search term to filter the results.
+You can provide an optional fuzzy search terms to filter the results.
 
 ## Configuration
 
