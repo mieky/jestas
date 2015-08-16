@@ -1,15 +1,14 @@
 {
   "name": "jestas",
-  "version": "0.0.1",
   "description": "Show Jenkins build statuses from the command line",
-  "main": "built.js",
-  "scripts": {
-    "build": "./node_modules/.bin/babel index.js --out-file built.js",
-    "preinstall": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.0.1",
   "author": "Mike Arvela <mike@arvela.net>",
-  "license": "MIT",
+  "bin": {
+    "jestas": "run.js"
+  },
+  "bugs": {
+    "url": "https://github.com/mieky/jestas/issues"
+  },
   "dependencies": {
     "cli-color": "^1.0.0",
     "find-config": "^0.3.0",
@@ -21,7 +20,21 @@
   "devDependencies": {
     "babel": "^5.8.21"
   },
-  "bin": {
-      "jestas": "run.js"
+  "homepage": "https://github.com/mieky/jestas",
+  "keywords": [
+    "cli",
+    "jenkins",
+    "status"
+  ],
+  "license": "MIT",
+  "main": "built.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mieky/benson.git"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/babel index.js --out-file built.js",
+    "preinstall": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
