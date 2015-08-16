@@ -1,7 +1,7 @@
 {
   "name": "jestas",
   "description": "Show Jenkins build statuses from the command line",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Mike Arvela <mike@arvela.net>",
   "bin": {
     "jestas": "run.js"
@@ -30,7 +30,7 @@
   "main": "built.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mieky/benson.git"
+    "url": "https://github.com/mieky/jestas.git"
   },
   "scripts": {
     "build": "./node_modules/.bin/babel index.js --out-file built.js",
