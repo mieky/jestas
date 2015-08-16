@@ -1,7 +1,7 @@
 {
   "name": "jestas",
   "description": "Show Jenkins build statuses from the command line",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Mike Arvela <mike@arvela.net>",
   "bin": {
     "jestas": "run.js"
