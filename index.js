@@ -18,7 +18,6 @@ if (!configFile) {
 }
 
 var config = require(configFile);
-console.log("Using configuration", config);
 var filterStr = process.argv.splice(2).join("");
 
 function colorToStatus(color) {
@@ -57,4 +56,7 @@ fetch(url)
     .then(mapColorsToStatuses)
     .then(jobs => {
         jobs.forEach(prettyPrint);
+    })
+    .catch(err => {
+        console.log(`Couldn't fetch build list from ${url}: ${err.message}`);
     });
