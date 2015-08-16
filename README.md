@@ -2,24 +2,24 @@
 
 Show Jenkins build statuses from the command line.
 
-![Screenshot](https://github.com/mieky/jestas/raw/master/screenshot.png)
-
-Requires node 0.10+.
+![Screenshot](https://github.com/mieky/jestas/raw/master/screenshot.gif)
 
 Installation:
 `npm install -g jestas`
 
-## Usage:
+Requires node 0.10+.
 
-`jestas [search]`
+## Usage
+
+Put a configuration file in place, and run:
+
+`jestas [fuzzy search terms]`
 
 You can provide an optional fuzzy search term to filter the results.
 
-Uses the NodeJS QA repository configured in `./jestas.json` by default.
-
 ## Configuration
 
-Put configuration file `jestas.json` to either the current directory or one of its parents, where findConfig will pick it up. It should look like this:
+A configuration file `jestas.json` will be picked up at any of the parents of the current directory (or itself). It should look like this:
 
 ```
 {
@@ -27,7 +27,7 @@ Put configuration file `jestas.json` to either the current directory or one of i
 }
 ```
 
-Where `http://jenkins.nodejs.org/` is the root URL of the Jenkins installation you want to query.
+Where `http://jenkins.nodejs.org/` is the root URL of the Jenkins installation you want to query. Currently, it only supports one entry.
 
 ## Acknowledgements
 
