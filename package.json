@@ -1,0 +1,21 @@
+{
+  "name": "jenkinson",
+  "version": "1.0.0",
+  "description": "Show Jenkins build statuses from the command line",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mike Arvela <mike@arvela.net>",
+  "license": "MIT",
+  "dependencies": {
+    "cli-color": "^1.0.0",
+    "find-config": "^0.3.0",
+    "lodash": "^3.10.1",
+    "node-fetch": "^1.3.2",
+    "pad": "^0.1.0"
+  },
+  "devDependencies": {
+    "babel": "^5.8.21"
+  }
+}
