@@ -20,10 +20,25 @@ var config = require(configFile);
 var filterStr = process.argv.splice(2).join("");
 
 function colorToStatus(color) {
+    // blue -> "ok"
+    // aborted* -> "fail"
+    // *anime -> "busy"
+    // notbuilt -> "new"
+    // disabled -> "off"
+    // others -> "fail"
     if (color === "blue") {
         return clc.green("ok");
+    } else if (color.substring(0, 7) === "aborted") {
+        return clc.red("fail");
+    } else if (color.substring(color.length - 6) === "_anime") {
+        return clc.white("busy");
+    } else if (color === "notbuilt") {
+        return clc.black("new");
+    } else if (color === "disabled") {
+        return clc.black("off");
+    } else {
+        return clc.red("fail");
     }
-    return clc.red("fail");
 }
 
 var filterByName = function(str, arr) {
