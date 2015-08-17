@@ -10,6 +10,7 @@
     "url": "https://github.com/mieky/jestas/issues"
   },
   "dependencies": {
+    "babel": "^5.8.21",
     "cli-color": "^1.0.0",
     "find-config": "^0.3.0",
     "fuzzy": "^0.1.0",
@@ -18,7 +19,6 @@
     "pad": "^0.1.0"
   },
   "devDependencies": {
-    "babel": "^5.8.21",
     "eslint": "^1.1.0"
   },
   "homepage": "https://github.com/mieky/jestas",
@@ -36,7 +36,7 @@
   "scripts": {
     "build": "./node_modules/.bin/babel index.js --out-file built.js",
     "eslint": "./node_modules/.bin/eslint index.js",
-    "preinstall": "npm run build",
+    "postinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
