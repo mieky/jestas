@@ -13,13 +13,17 @@ Requires node 0.10+.
 
 ## Usage
 
-Put a configuration file in place, and run `jestas`.
+Put a configuration file in place (see below), and run `jestas`.
+
+**Fuzzy filtering**
 
 You can provide fuzzy search terms to filter the results, for example:
 
 `jestas node win`
 
 This only would list builds whose name include the words "node" and "win", in that order. It might match *nodejs-v0.10-windows* and *nodejs-v0.12-windows*, but not *nodejs-v0.10-osx*.
+
+**Build logs**
 
 If the search yields precisely one match, then the latest (possibly partial) build log will be displayed:
 
@@ -63,6 +67,13 @@ A configuration file `jestas.json` will be picked up at any of the parents of th
 ```
 
 Where `http://jenkins.nodejs.org/` is the root URL of the Jenkins installation you want to query. Currently, it only supports one entry, and the prefix — here "node" — is completely arbitrary.
+
+## Changelog
+
+- **0.2.0** Fetch most recent build log when search yields exactly one match.
+- **0.1.1** Fix installation to work without a global Babel (duh!)
+- **0.1.0** Support for the rest of Jenkins build statuses.
+- **0.0.1** First release with only pass/fail statuses.
 
 ## Acknowledgements
 
