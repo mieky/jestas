@@ -1,6 +1,6 @@
 # jestas
 
-[![Build Status](https://travis-ci.org/mieky/jestas.svg?branch=master)](https://travis-ci.org/mieky/jestas)
+[![npm version](https://badge.fury.io/js/jestas.svg)](http://badge.fury.io/js/jestas) [![Build Status](https://travis-ci.org/mieky/jestas.svg?branch=master)](https://travis-ci.org/mieky/jestas) 
 
 Show Jenkins build statuses from the command line.
 
