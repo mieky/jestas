@@ -42,8 +42,18 @@ function colorToStatus(color) {
 }
 
 var filterByName = function(str, arr) {
+    // Fuzzy-filter to get the list of matching names
     var includedNames = fuzzy.filter(str, arr.map(i => i.name))
         .map(e => e.string);
+
+    // If given name is an exact match, treat it as an
+    // only result (otherwise you wouldn't be able to select
+    // "node-v1-win" if there was also "node-julien-v1-win")
+    if (includedNames.indexOf(str) >= 0) {
+        includedNames = [str];
+    }
+
+    // Return matching objects from original list
     return arr.filter(i => includedNames.indexOf(i.name) >= 0);
 }.bind(null, filterStr);
 
@@ -61,6 +71,17 @@ function prettyPrint(job) {
     console.log(jobStatus);
 }
 
+function printLog(job) {
+    var url = `${config[prefix]}/job/${job.name}/lastBuild/logText/progressiveText?start=0`;
+    return fetch(url)
+        .then(r => r.text())
+        .then(text => { console.log(`\n${text}`); })
+        .catch(err => {
+            console.log(`Couldn't fetch log for job from ${url}`);
+            process.exit(1);
+        });
+}
+
 var prefix = _.first(_.keys(config));
 var url = config[prefix] + "/api/json?pretty=true";
 fetch(url)
@@ -70,6 +91,9 @@ fetch(url)
     .then(mapColorsToStatuses)
     .then(jobs => {
         jobs.forEach(prettyPrint);
+        if (jobs.length === 1) {
+            return printLog(jobs[0]);
+        }
     })
     .catch(err => {
         console.log(`Couldn't fetch build list from ${url}: ${err.message}`);

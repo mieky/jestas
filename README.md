@@ -4,7 +4,7 @@
 
 Show Jenkins build statuses from the command line.
 
-![Screenshot](https://github.com/mieky/jestas/raw/master/screenshot.gif)
+![jestas usage example](https://github.com/mieky/jestas/raw/master/images/screenshot.gif)
 
 Installation:
 `npm install -g jestas`
@@ -20,6 +20,10 @@ You can provide fuzzy search terms to filter the results, for example:
 `jestas node win`
 
 This only would list builds whose name include the words "node" and "win", in that order. It might match *nodejs-v0.10-windows* and *nodejs-v0.12-windows*, but not *nodejs-v0.10-osx*.
+
+If the search yields precisely one match, then the latest build log will be displayed:
+
+![showing last build log](https://github.com/mieky/jestas/raw/master/images/buildlog.png)
 
 ## Configuration
 
