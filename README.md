@@ -1,5 +1,7 @@
 # jestas
 
+[![Build Status](https://travis-ci.org/mieky/jestas.svg?branch=master)](https://travis-ci.org/mieky/jestas)
+
 Show Jenkins build statuses from the command line.
 
 ![Screenshot](https://github.com/mieky/jestas/raw/master/screenshot.gif)
@@ -11,11 +13,13 @@ Requires node 0.10+.
 
 ## Usage
 
-Put a configuration file in place, and run:
+Put a configuration file in place, and run `jestas`.
 
-`jestas [fuzzy search terms]`
+You can provide fuzzy search terms to filter the results, for example:
 
-You can provide an optional fuzzy search terms to filter the results.
+`jestas node win`
+
+This only would list builds whose name include the words "node" and "win", in that order. It might match *nodejs-v0.10-windows* and *nodejs-v0.12-windows*, but not *nodejs-v0.10-osx*.
 
 ## Configuration
 
@@ -27,7 +31,7 @@ A configuration file `jestas.json` will be picked up at any of the parents of th
 }
 ```
 
-Where `http://jenkins.nodejs.org/` is the root URL of the Jenkins installation you want to query. Currently, it only supports one entry.
+Where `http://jenkins.nodejs.org/` is the root URL of the Jenkins installation you want to query. Currently, it only supports one entry, and the prefix — here "node" — is completely arbitrary.
 
 ## Acknowledgements
 
