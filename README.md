@@ -1,34 +1,26 @@
 # jestas
 
-[![npm version](https://badge.fury.io/js/jestas.svg)](http://badge.fury.io/js/jestas) [![Build Status](https://travis-ci.org/mieky/jestas.svg?branch=master)](https://travis-ci.org/mieky/jestas) 
+[![npm version](https://badge.fury.io/js/jestas.svg)](http://badge.fury.io/js/jestas) [![Build Status](https://travis-ci.org/mieky/jestas.svg?branch=master)](https://travis-ci.org/mieky/jestas)
 
 Show Jenkins build statuses from the command line.
+
+- Requires Node v6.0 or newer.
+- Supports Jenkins 1.4 & 2.0.
 
 ![jestas usage example](https://github.com/mieky/jestas/raw/master/screenshot.gif)
 
 Installation:
 `npm install -g jestas`
 
-Requires node 0.10+.
-
 ## Usage
 
-Put a configuration file in place (see below), and run `jestas`.
+Create a configuration file (instructions below) and run `jestas`.
 
-**Fuzzy filtering**
-
-You can provide fuzzy search terms to filter the results, for example:
-
-`jestas node win`
-
-This only would list builds whose name include the words "node" and "win", in that order. It might match *nodejs-v0.10-windows* and *nodejs-v0.12-windows*, but not *nodejs-v0.10-osx*.
-
-**Build logs**
-
-If the search yields precisely one match, then the latest (possibly partial) build log will be displayed:
+- By default, the status of all build jobs is listed.
+- Giving a *job name* as a parameter will display the latest (possibly partial) build log:
 
 ```
-$ jestas nodejs-v0.10-windows
+$ js-v0.10-windows
 busy  nodejs-v0.10-windows
 
 Started by timer
@@ -56,20 +48,42 @@ Triggering nodejs-v0.10-windows » ia32,windows
 Configuration nodejs-v0.10-windows » x64,windows is still in the queue: All nodes of label ‘windows’ are offline
 ```
 
+**Fuzzy filtering**
+
+You can provide fuzzy search terms to filter the results, for example `jestas node win` would list builds whose name include the words "node" and "win", in that order. It might match *nodejs-v0.10-windows* and *nodejs-v0.12-windows*, but not *nodejs-v0.10-osx*.
+
+
 ## Configuration
 
-A configuration file `jestas.json` will be picked up at any of the parents of the current directory (or itself). It should look like this:
+A configuration file `jestas.json` will be picked up at any of the parents of the current directory (or itself).
+
+A simple, **unauthenticated** (where everyone has read access on the Jenkins host) configuration looks like this:
 
 ```
 {
-    "node": "http://jenkins.nodejs.org/"
+    "url": "https://jenkins.qa.ubuntu.com/"
 }
 ```
 
-Where `http://jenkins.nodejs.org/` is the root URL of the Jenkins installation you want to query. Currently, it only supports one entry, and the prefix — here "node" — is completely arbitrary.
+Where `http://jenkins.nodejs.org/` is the root URL of the Jenkins installation you want to query.
+
+For **authenticated** requests, you must supply the `user` and `token` parameters:
+
+- `user` is your Jenkins username,
+- `token` is your personal API token. Get it by visiting `http://<server_url>/me/configure` on your Jenkins host
+
+```
+{
+    "url": "http://my-private-jenkins-instance.org/",
+    "user": "clarence-oveur",
+    "token": "c83d6c69f05ffab983ab0dc2d26656ed"
+}
+```
 
 ## Changelog
 
+- **1.0.0** Add support for authenticated requests, require Node 6.0.
+  - **Breaking changes:** updated configuration syntax to have *server*, *user* and *token*
 - **0.2.0** Fetch most recent build log when search yields exactly one match.
 - **0.1.1** Fix installation to work without a global Babel (duh!)
 - **0.1.0** Support for the rest of Jenkins build statuses.

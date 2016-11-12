@@ -1,23 +1,26 @@
-var findConfig = require("find-config");
-var fetch = require("node-fetch");
-var fuzzy = require("fuzzy");
-var util = require("util");
-var clc = require("cli-color");
-var pad = require("pad");
-var _ = require("lodash");
+const findConfig = require("find-config");
+const nodeFetch = require("node-fetch");
+const fuzzy = require("fuzzy");
+const util = require("util");
+const clc = require("cli-color");
+const pad = require("pad");
+const _ = require("lodash");
 
-var configFile = findConfig("jestas.json");
+const configFile = findConfig("jestas.json");
 if (!configFile) {
     console.log(`Configuration file not found. Create a 'jestas.json' that looks like this:
 {
-    \"node\": \"http://jenkins.nodejs.org/\"
+    \"server\": \"http://localhost:8080/\",
+    \"user\": \"username\",
+    \"token\": \"api_token_received_from_jenkins"
 }
 `);
     process.exit(1);
 }
 
-var config = require(configFile);
-var filterStr = process.argv.splice(2).join("");
+const config = require(configFile);
+const filterStr = process.argv.splice(2).join("");
+const fetch = require("./auth-wrapper").wrapFetch(nodeFetch, config);
 
 function colorToStatus(color) {
     // blue -> "ok"
@@ -72,7 +75,7 @@ function prettyPrint(job) {
 }
 
 function printLog(job) {
-    var url = `${config[prefix]}/job/${job.name}/lastBuild/logText/progressiveText?start=0`;
+    const url = `${config.server}/job/${job.name}/lastBuild/logText/progressiveText?start=0`;
     return fetch(url)
         .then(r => r.text())
         .then(text => { console.log(`\n${text}`); })
@@ -82,10 +85,14 @@ function printLog(job) {
         });
 }
 
-var prefix = _.first(_.keys(config));
-var url = config[prefix] + "/api/json?pretty=true";
+const url = `${config.server}/api/json?pretty=true`;
 fetch(url)
-    .then(r => r.json())
+    .then(res => {
+        if (res.status === 403) {
+            throw new Error(`Authentication error: did you specify 'user' and 'token' in jestas.json?`);
+        }
+        return res.json();
+    })
     .then(json => json.jobs)
     .then(filterByName)
     .then(mapColorsToStatuses)
