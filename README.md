@@ -20,7 +20,7 @@ Create a configuration file (instructions below) and run `jestas`.
 - Giving a *job name* as a parameter will display the latest (possibly partial) build log:
 
 ```
-$ js-v0.10-windows
+$ jestas nodejs-v0.10-windows
 busy  nodejs-v0.10-windows
 
 Started by timer
