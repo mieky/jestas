@@ -24,7 +24,7 @@
     "righteous-js": "git+https://github.com/mieky/righteous-js.git"
   },
   "eslintConfig": {
-    "extends": "./node_modules/righteous-js/.eslintrc.js"
+    "extends": "node_modules/righteous-js/.eslintrc.js"
   },
   "homepage": "https://github.com/mieky/jestas",
   "keywords": [
@@ -39,9 +39,8 @@
     "url": "https://github.com/mieky/jestas.git"
   },
   "scripts": {
-    "build": "./node_modules/.bin/babel index.js --out-file built.js",
-    "lint": "./node_modules/righteous-js/lint.js",
-    "postinstall": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node_modules/.bin/babel index.js --out-file built.js",
+    "lint": "node_modules/righteous-js/lint.js",
+    "postinstall": "npm run build"
   }
 }
