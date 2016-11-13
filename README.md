@@ -61,11 +61,11 @@ A simple, **unauthenticated** (where everyone has read access on the Jenkins hos
 
 ```
 {
-    "url": "https://jenkins.qa.ubuntu.com/"
+    "url": "https://jenkins.qa.ubuntu.com"
 }
 ```
 
-Where `http://jenkins.nodejs.org/` is the root URL of the Jenkins installation you want to query.
+Where `url` specifies the root URL of the Jenkins installation you want to query.
 
 For **authenticated** requests, you must supply the `user` and `token` parameters:
 
@@ -74,7 +74,7 @@ For **authenticated** requests, you must supply the `user` and `token` parameter
 
 ```
 {
-    "url": "http://my-private-jenkins-instance.org/",
+    "url": "http://my-private-jenkins-instance.org",
     "user": "clarence-oveur",
     "token": "c83d6c69f05ffab983ab0dc2d26656ed"
 }

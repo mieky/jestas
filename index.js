@@ -19,6 +19,11 @@ if (!configFile) {
 }
 
 const config = require(configFile);
+if (!config.server) {
+    console.log("'server' attribute not found in configuration file. Please check the syntax!");
+    process.exit(1);
+}
+
 const filterStr = process.argv.splice(2).join("");
 const fetch = require("./auth-wrapper").wrapFetch(nodeFetch, config);
 
@@ -44,9 +49,9 @@ function colorToStatus(color) {
     }
 }
 
-var filterByName = function(str, arr) {
+const filterByName = function(str, arr) {
     // Fuzzy-filter to get the list of matching names
-    var includedNames = fuzzy.filter(str, arr.map(i => i.name))
+    const includedNames = fuzzy.filter(str, arr.map(i => i.name))
         .map(e => e.string);
 
     // If given name is an exact match, treat it as an
@@ -68,7 +73,7 @@ function mapColorsToStatuses(jobs) {
 }
 
 function prettyPrint(job) {
-    var jobStatus = util.format("%s %s",
+    const jobStatus = util.format("%s %s",
         pad(job.status, 5, { colors: true }),
         job.name);
     console.log(jobStatus);
