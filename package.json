@@ -9,6 +9,9 @@
   "bugs": {
     "url": "https://github.com/mieky/jestas/issues"
   },
+  "config": {
+    "lintTargets": "*.js"
+  },
   "dependencies": {
     "babel": "^5.8.38",
     "cli-color": "^1.1.0",
@@ -18,9 +21,10 @@
     "pad": "^1.0.2"
   },
   "devDependencies": {
-    "eslint": "^3.10.0",
-    "eslint-config-airbnb-base": "^10.0.1",
-    "eslint-plugin-import": "^2.2.0"
+    "righteous-js": "git+https://github.com/mieky/righteous-js.git"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/righteous-js/.eslintrc.js"
   },
   "homepage": "https://github.com/mieky/jestas",
   "keywords": [
@@ -36,7 +40,7 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/babel index.js --out-file built.js",
-    "eslint": "./node_modules/.bin/eslint index.js",
+    "lint": "./node_modules/righteous-js/lint.js",
     "postinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   }

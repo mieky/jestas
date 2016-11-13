@@ -34,11 +34,11 @@ function wrapFetch(originalFetch, config) {
     }
 
     // Fetch crumb once
-    let crumbPromise = getCrumbAsync(config);
+    const crumbPromise = getCrumbAsync(config);
 
     // Return an alternative 'fetch' function which will augment all incoming requests
     // with credentials (also changing the request method to POST)
-    return function(requestUrl, options) {
+    return function wrappedFetch(requestUrl, options) {
         return crumbPromise.then(crumb => {
             // curl -X POST -H "Jenkins-Crumb:8eab98739f0e1d623999b659d94010a9" 'http://cakelover:c83d6c69f05ffab983ab0dc2d26656ed@localhost:8080/api/json?pretty=true'
 
