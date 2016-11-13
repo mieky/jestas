@@ -51,7 +51,7 @@ function colorToStatus(color) {
 
 const filterByName = function(str, arr) {
     // Fuzzy-filter to get the list of matching names
-    const includedNames = fuzzy.filter(str, arr.map(i => i.name))
+    let includedNames = fuzzy.filter(str, arr.map(i => i.name))
         .map(e => e.string);
 
     // If given name is an exact match, treat it as an
