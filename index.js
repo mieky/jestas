@@ -4,21 +4,20 @@ const fuzzy = require("fuzzy");
 const util = require("util");
 const clc = require("cli-color");
 const pad = require("pad");
-const _ = require("lodash");
 
 const configFile = findConfig("jestas.json");
 if (!configFile) {
     console.log(`Configuration file not found. Create a 'jestas.json' that looks like this:
 {
-    \"server\": \"http://localhost:8080/\",
-    \"user\": \"username\",
-    \"token\": \"api_token_received_from_jenkins"
+    "server": "http://localhost:8080",
+    "user": "username",
+    "token": "api_token_received_from_jenkins"
 }
 `);
     process.exit(1);
 }
 
-const config = require(configFile);
+const config = require(configFile); // eslint-disable-line import/no-dynamic-require
 if (!config.server) {
     console.log("'server' attribute not found in configuration file. Please check the syntax!");
     process.exit(1);
@@ -44,12 +43,11 @@ function colorToStatus(color) {
         return clc.black("new");
     } else if (color === "disabled") {
         return clc.black("off");
-    } else {
-        return clc.red("fail");
     }
+    return clc.red("fail");
 }
 
-const filterByName = function(str, arr) {
+const filterByName = function filterArrByStr(str, arr) {
     // Fuzzy-filter to get the list of matching names
     let includedNames = fuzzy.filter(str, arr.map(i => i.name))
         .map(e => e.string);
@@ -67,8 +65,8 @@ const filterByName = function(str, arr) {
 
 function mapColorsToStatuses(jobs) {
     return jobs.map(job => ({
-        "status": colorToStatus(job.color),
-        "name": job.name
+        status: colorToStatus(job.color),
+        name: job.name
     }));
 }
 
@@ -83,9 +81,9 @@ function printLog(job) {
     const url = `${config.server}/job/${job.name}/lastBuild/logText/progressiveText?start=0`;
     return fetch(url)
         .then(r => r.text())
-        .then(text => { console.log(`\n${text}`); })
+        .then(text => console.log(`\n${text}`))
         .catch(err => {
-            console.log(`Couldn't fetch log for job from ${url}`);
+            console.log(`Couldn't fetch log for job from ${url}: ${err.message}`);
             process.exit(1);
         });
 }
@@ -106,6 +104,7 @@ fetch(url)
         if (jobs.length === 1) {
             return printLog(jobs[0]);
         }
+        return null;
     })
     .catch(err => {
         console.log(`Couldn't fetch build list from ${url}: ${err.message}`);
