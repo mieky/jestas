@@ -21,7 +21,7 @@
     "pad": "^1.0.2"
   },
   "devDependencies": {
-    "righteous-js": "git+https://github.com/mieky/righteous-js.git"
+    "righteous-js": "^1.0.0"
   },
   "eslintConfig": {
     "extends": "node_modules/righteous-js/.eslintrc.js"
