@@ -10,7 +10,9 @@
     "url": "https://github.com/mieky/jestas/issues"
   },
   "dependencies": {
-    "babel": "^5.8.38",
+    "babel": "^6.5.2",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.0.0",
     "cli-color": "^1.1.0",
     "find-config": "^1.0.0",
     "fuzzy": "^0.1.3",
