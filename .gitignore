@@ -1,5 +1,4 @@
 node_modules
-built.js
+src/built.js
 npm-debug.log
 jestas.json
-

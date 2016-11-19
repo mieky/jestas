@@ -4,13 +4,12 @@
   "version": "1.1.0",
   "author": "Mike Arvela <mike@arvela.net>",
   "bin": {
-    "jestas": "run.js"
+    "jestas": "src/run.js"
   },
   "bugs": {
     "url": "https://github.com/mieky/jestas/issues"
   },
   "dependencies": {
-    "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.0.0",
     "cli-color": "^1.1.0",
@@ -39,7 +38,7 @@
     "url": "https://github.com/mieky/jestas.git"
   },
   "scripts": {
-    "build": "node_modules/.bin/babel src/index.js --out-file built.js",
+    "build": "node_modules/.bin/babel src/index.js --out-file src/built.js",
     "lint": "node_modules/righteous-js/lint.js",
     "postinstall": "npm run build"
   }

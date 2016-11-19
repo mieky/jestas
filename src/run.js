@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require("../built.js");
+require("./built.js");
