@@ -7,17 +7,41 @@ Show Jenkins build statuses from the command line.
 - Requires Node v6.0 or newer.
 - Supports Jenkins 1.4 & 2.0.
 
-![jestas usage example](https://github.com/mieky/jestas/raw/master/screenshot.gif)
-
 Installation:
 `npm install -g jestas`
 
+![jestas usage example](https://github.com/mieky/jestas/raw/master/screenshot.gif)
+
+
 ## Usage
 
-Create a configuration file (instructions below) and run `jestas`.
+Run `jestas`, either with a configuration file (see Configuration) or by passing the options manually.
 
-- By default, the status of all build jobs is listed.
-- Giving a *job name* as a parameter will display the latest (possibly partial) build log:
+See `jestas --help` for options.
+
+**Examples:**
+
+- Run with a jestas.json present in one of the parent directories:
+
+    `jestas`
+
+- Specify a configuration file:
+
+    `jestas --config myConfig.json`
+
+- Pass Jenkins server URL manually (everyone has read access):
+
+    `jestas --server https://jenkins.qa.ubuntu.com`
+
+- Pass server URL, username and API token (for authenticated use):
+
+    `jestas --server http://my.jenkins.url --user clarence-oveur --token foo123xyz`
+
+### Output
+
+By default, the status of all build jobs is listed.
+
+Giving a *job name* as a parameter will display the latest (possibly partial) build log:
 
 ```
 $ jestas nodejs-v0.10-windows
@@ -55,17 +79,19 @@ You can provide fuzzy search terms to filter the results, for example `jestas no
 
 ## Configuration
 
-A configuration file `jestas.json` will be picked up at any of the parents of the current directory (or itself).
+A configuration file `jestas.json` will be picked up at any of the parents of the current directory (or itself). There is a sample [jestas.json.example]((https://github.com/mieky/jestas/blob/master/jestas.json.example) provided for convenience.
+
+**Tip:** You can set any of the parameters as command-line arguments, including the config file location.
 
 A simple, **unauthenticated** (where everyone has read access on the Jenkins host) configuration looks like this:
 
 ```
 {
-    "url": "https://jenkins.qa.ubuntu.com"
+    "server": "https://jenkins.qa.ubuntu.com"
 }
 ```
 
-Where `url` specifies the root URL of the Jenkins installation you want to query.
+Where `server` specifies the root URL of the Jenkins installation you want to query.
 
 For **authenticated** requests, you must supply the `user` and `token` parameters:
 
@@ -74,14 +100,16 @@ For **authenticated** requests, you must supply the `user` and `token` parameter
 
 ```
 {
-    "url": "http://my-private-jenkins-instance.org",
+    "server": "http://my-private-jenkins-instance.org",
     "user": "clarence-oveur",
     "token": "c83d6c69f05ffab983ab0dc2d26656ed"
 }
 ```
 
+
 ## Changelog
 
+- **1.1.0** Add support for command-line arguments.
 - **1.0.0** Add support for authenticated requests, require Node 6.0.
   - **Breaking changes:** updated configuration syntax to have *server*, *user* and *token*
 - **0.2.0** Fetch most recent build log when search yields exactly one match.
