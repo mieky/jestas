@@ -40,6 +40,7 @@ function wrapFetch(originalFetch, config) {
     // with credentials (also changing the request method to POST)
     return function wrappedFetch(requestUrl, options) {
         return crumbPromise.then(crumb => {
+            // Generate the equivalent of:
             // curl -X POST -H "Jenkins-Crumb:8eab98739f0e1d623999b659d94010a9" 'http://cakelover:c83d6c69f05ffab983ab0dc2d26656ed@localhost:8080/api/json?pretty=true'
 
             const urlObj = url.parse(requestUrl);

@@ -1,30 +1,12 @@
-const findConfig = require("find-config");
 const nodeFetch = require("node-fetch");
 const fuzzy = require("fuzzy");
 const util = require("util");
 const clc = require("cli-color");
 const pad = require("pad");
+const config = require("./config");
 
-const configFile = findConfig("jestas.json");
-if (!configFile) {
-    console.log(`Configuration file not found. Create a 'jestas.json' that looks like this:
-{
-    "server": "http://localhost:8080",
-    "user": "username",
-    "token": "api_token_received_from_jenkins"
-}
-`);
-    process.exit(1);
-}
-
-const config = require(configFile); // eslint-disable-line import/no-dynamic-require
-if (!config.server) {
-    console.log("'server' attribute not found in configuration file. Please check the syntax!");
-    process.exit(1);
-}
-
-const filterStr = process.argv.splice(2).join("");
-const fetch = require("./auth-wrapper").wrapFetch(nodeFetch, config);
+const filterStr = config.opts._.join("");
+const fetch = require("./auth-wrapper").wrapFetch(nodeFetch, config.opts);
 
 function colorToStatus(color) {
     // blue -> "ok"
@@ -78,7 +60,7 @@ function prettyPrint(job) {
 }
 
 function printLog(job) {
-    const url = `${config.server}/job/${job.name}/lastBuild/logText/progressiveText?start=0`;
+    const url = `${config.opts.server}/job/${job.name}/lastBuild/logText/progressiveText?start=0`;
     return fetch(url)
         .then(r => r.text())
         .then(text => console.log(`\n${text}`))
@@ -88,7 +70,7 @@ function printLog(job) {
         });
 }
 
-const url = `${config.server}/api/json?pretty=true`;
+const url = `${config.opts.server}/api/json?pretty=true`;
 fetch(url)
     .then(res => {
         if (res.status === 403) {
