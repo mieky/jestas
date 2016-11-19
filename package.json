@@ -39,7 +39,7 @@
     "url": "https://github.com/mieky/jestas.git"
   },
   "scripts": {
-    "build": "node_modules/.bin/babel index.js --out-file built.js",
+    "build": "node_modules/.bin/babel src/index.js --out-file built.js",
     "lint": "node_modules/righteous-js/lint.js",
     "postinstall": "npm run build"
   }
