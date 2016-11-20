@@ -4,7 +4,7 @@
 
 Show Jenkins build statuses from the command line.
 
-- Requires Node v6.0 or newer.
+- Requires **Node 4.0** or newer, with npm 3.
 - Supports Jenkins 1.4 & 2.0.
 
 Installation:
@@ -109,6 +109,7 @@ For **authenticated** requests, you must supply the `user` and `token` parameter
 
 ## Changelog
 
+- **1.2.0** Add support for Node 4 (still requires npm3, though)
 - **1.1.0** Add support for command-line arguments.
 - **1.0.0** Add support for authenticated requests, require Node 6.0.
   - **Breaking changes:** updated configuration syntax to have *server*, *user* and *token*

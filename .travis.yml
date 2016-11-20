@@ -1,6 +1,8 @@
 language: node_js
 node_js:
+- 4
 - 6
+before_install: npm install -g npm@3
 script: npm run lint --silent && npm run build
 notifications:
   email:

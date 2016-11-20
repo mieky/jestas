@@ -1,4 +1,4 @@
 node_modules
-src/built.js
 npm-debug.log
 jestas.json
+dist/
