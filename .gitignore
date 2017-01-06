@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 jestas.json
 dist/
+*.testing.json
