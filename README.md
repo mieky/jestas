@@ -29,13 +29,18 @@ See `jestas --help` for options.
 
     `jestas --config myConfig.json`
 
-- Pass Jenkins server URL manually (everyone has read access):
+- Pass Jenkins server URL manually (if everyone has read access):
 
     `jestas --server https://jenkins.qa.ubuntu.com`
 
 - Pass server URL, username and API token (for authenticated use):
 
     `jestas --server http://my.jenkins.url --user clarence-oveur --token foo123xyz`
+
+- Allow Jenkins server with a self-signed certificate:
+
+    `jestas --server https://my.jenkins.url --trust`
+
 
 ### Output
 
@@ -106,9 +111,19 @@ For **authenticated** requests, you must supply the `user` and `token` parameter
 }
 ```
 
+### Self-signed certificates
+
+Jenkins installations running over HTTPS with self-signed certificates are distrusted by default. To allow communicating with these hosts, you can add the `trust` option.
+
+```
+{
+    "trust": true
+}
+```
 
 ## Changelog
 
+- **1.3.0** Add `trust` option for allowing self-signed certificates
 - **1.2.0** Add support for Node 4 (still requires npm3, though)
 - **1.1.0** Add support for command-line arguments.
 - **1.0.0** Add support for authenticated requests, require Node 6.0.
