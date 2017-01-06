@@ -59,9 +59,9 @@ function prettyPrint(job) {
     console.log(jobStatus);
 }
 
-function printLog(job) {
+function printLog(job, options) {
     const url = `${config.opts.server}/job/${job.name}/lastBuild/logText/progressiveText?start=0`;
-    return fetch(url)
+    return fetch(url, options)
         .then(r => r.text())
         .then(text => console.log(`\n${text}`))
         .catch(err => {
@@ -71,7 +71,7 @@ function printLog(job) {
 }
 
 const url = `${config.opts.server}/api/json?pretty=true`;
-fetch(url)
+fetch(url, config.opts)
     .then(res => {
         if (res.status === 403) {
             throw new Error(`Authentication error: did you specify 'user' and 'token' in jestas.json?`);
@@ -84,7 +84,7 @@ fetch(url)
     .then(jobs => {
         jobs.forEach(prettyPrint);
         if (jobs.length === 1) {
-            return printLog(jobs[0]);
+            return printLog(jobs[0], config.opts);
         }
         return null;
     })

@@ -19,7 +19,7 @@ function getCrumbAsync(config) {
     //     crumb: '30976241b3b761626599629f6a3b9a38',
     //     crumbRequestField: 'Jenkins-Crumb'
     // }
-    return fetch(crumbUrl)
+    return fetch(crumbUrl, config)
         .then(res => res.json())
         .catch(err => {
             console.log(`Error while fetching crumb: ${err.message}`);

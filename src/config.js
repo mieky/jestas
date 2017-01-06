@@ -5,6 +5,7 @@ const findConfig = require("find-config");
 const yargs = require("yargs");
 const path = require("path");
 const fs = require("fs");
+const https = require("https");
 
 // Configuration can be specified by either:
 // - with option --config myCustomConfig.json
@@ -33,10 +34,15 @@ function getOptions() {
             describe: "API token for authentication (optional)",
             type: "string"
         })
+        .option("trust", {
+            describe: "Allow self-signed certificates",
+            type: "boolean"
+        })
         .help("h")
         .alias("s", "server")
         .alias("u", "user")
         .alias("t", "token")
+        .alias("T", "trust")
         .alias("c", "config")
         .alias("h", "help")
         .alias("v", "version")
@@ -86,6 +92,12 @@ if (configLocation) {
         console.log(`Configuration file at ${configLocation} is missing 'server' attribute.`);
         process.exit(1);
     }
+}
+
+// Self-signed certificates are rejected by default. Allow them if explicitly specified.
+if (opts.trust) {
+    opts.rejectUnauthorized = false;
+    opts.agent = new https.Agent(opts);
 }
 
 module.exports = {
