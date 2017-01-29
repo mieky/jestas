@@ -15,7 +15,7 @@ Installation:
 
 ## Usage
 
-Run `jestas`, either with a configuration file (see Configuration) or by passing the options manually.
+Run `jestas`, either with a configuration file (see [Configuration](#configuration)) or by passing the options manually.
 
 See `jestas --help` for options.
 
@@ -84,7 +84,7 @@ You can provide fuzzy search terms to filter the results, for example `jestas no
 
 ## Configuration
 
-A configuration file `jestas.json` will be picked up at any of the parents of the current directory (or itself). There is a sample [jestas.json.example]((https://github.com/mieky/jestas/blob/master/jestas.json.example) provided for convenience.
+A configuration file `jestas.json` will be picked up at any of the parents of the current directory (or itself). There is a sample [jestas.json.example](https://github.com/mieky/jestas/blob/master/jestas.json.example) provided for convenience.
 
 **Tip:** You can set any of the parameters as command-line arguments, including the config file location.
 
