@@ -1,3 +1,5 @@
+**This repository is no longer maintained. Using it is discouraged for purposes other than learning and inspiration ✌🏻**
+
 # jestas
 
 [![npm version](https://badge.fury.io/js/jestas.svg)](http://badge.fury.io/js/jestas) [![Build Status](https://travis-ci.org/mieky/jestas.svg?branch=master)](https://travis-ci.org/mieky/jestas)
